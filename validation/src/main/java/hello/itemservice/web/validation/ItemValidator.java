@@ -3,6 +3,7 @@ package hello.itemservice.web.validation;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 import org.springframework.validation.Errors;
+import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 
 import hello.itemservice.domain.item.Item;
@@ -13,7 +14,7 @@ public class ItemValidator  implements Validator{
 	@Override
 	public boolean supports(Class<?> clazz) {
 		
-		return ItemValidator.class.isAssignableFrom(clazz);
+		return Item.class.isAssignableFrom(clazz);
 	}
 
 	@Override
@@ -23,9 +24,7 @@ public class ItemValidator  implements Validator{
 		
     	
     	//검증 로직
-    	if(!StringUtils.hasText(item.getItemName())) {	
-    		errors.rejectValue("itemName", "required");
-    	}
+		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "itemName","required");
     	
     	if(item.getPrice() == null || item.getPrice() < 1000 || item.getPrice() > 1000000) {
     		errors.rejectValue("price", "range",new Object[] {1000,1000000},null);
