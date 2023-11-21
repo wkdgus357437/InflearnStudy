@@ -259,11 +259,11 @@ public class ValidationItemControllerV2 {
         redirectAttributes.addAttribute("status", true);
         return "redirect:/validation/v2/items/{itemId}";
     }
-    
+     
     @PostMapping("/add")
     public String addItemV6(@Validated @ModelAttribute Item item, BindingResult bindingResult,RedirectAttributes redirectAttributes, Model model) {   	
     	
-    	//검증에 실패하면 다시 입력 폼으로
+    	//검증에 실패하면 다시 입력 폼으로 진행
     	if(bindingResult.hasErrors()) {
     		log.info("errors ={}", bindingResult);
     		return  "validation/v2/addForm";
