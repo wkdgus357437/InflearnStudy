@@ -51,7 +51,7 @@ public class MemberRepositoryV5 implements MemberRepository {
             member.setMemberId(rs.getString("member_id"));
             member.setMoney(rs.getInt("money"));
             return member;
-        };
+            };
     }
 
 }
